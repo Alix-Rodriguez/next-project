@@ -15,7 +15,7 @@ export function LatestGames(props) {
           limit,
           platformId,
         });
-        setGames(response.data);
+        setGames(response.games);
       } catch (error) {
         console.error(error);
       }

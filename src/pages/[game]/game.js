@@ -4,28 +4,28 @@ import { Separator, Seo } from "@/components/Shared";
 
 export default function GamePage(props) {
   const { game } = props;
-  const wallpaper = game.attributes.wallpaper;
+  const wallpaper = game.games.wallpaper_url;
 
   return (
     <>
       <Seo
-        title={game.attributes.title}
-        description={game.attributes.summary}
+        title={game.games.title}
+        description={game.games.summary}
       />
 
       <BasicLayout>
-        <Game.HeaderWallpaper image={wallpaper.data.attributes.url} />
-        <Game.Panel gameId={game.id} game={game.attributes} />
+        <Game.HeaderWallpaper image={wallpaper} />
+        <Game.Panel gameId={game.games.id} game={game.games} />
 
         <Separator height={50} />
 
-        <Game.Info game={game.attributes} />
+        <Game.Info game={game.games} />
 
         <Separator height={30} />
 
         <Game.Media
-          video={game.attributes.video}
-          screenshots={game.attributes.screenshots.data}
+          video={game.games.video}
+          screenshots={game.games.screenshots_url}
         />
 
         <Separator height={50} />

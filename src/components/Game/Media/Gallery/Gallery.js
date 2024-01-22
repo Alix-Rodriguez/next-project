@@ -11,7 +11,8 @@ export function Gallery(props) {
 
   const onOpenClose = () => setShow((prevState) => !prevState);
 
-  const screenshotsClone = [...screenshots];
+  //! const screenshotsClone = [...screenshots]; multiimagenes
+  const screenshotsClone = [screenshots];
   const principalImage = screenshotsClone.shift();
 
   const settings = {
@@ -22,7 +23,7 @@ export function Gallery(props) {
     slidesToScroll: 1,
     arrows: false,
     customPaging: function (index) {
-      return <Image src={screenshots[index].attributes.url} />;
+      return <Image src={screenshots[index]} />;
     },
   };
 
@@ -30,13 +31,13 @@ export function Gallery(props) {
     <>
       <div className={styles.gallery}>
         <div className={styles.principal}>
-          <Image src={principalImage.attributes.url} onClick={onOpenClose} />
+          <Image src={principalImage} onClick={onOpenClose} />
         </div>
 
         <div className={styles.grid}>
           {map(screenshotsClone, (screenshot) => (
-            <div key={screenshot.id}>
-              <Image src={screenshot.attributes.url} onClick={onOpenClose} />
+            <div key={screenshot}>
+              <Image src={screenshot} onClick={onOpenClose} />
             </div>
           ))}
         </div>
@@ -46,8 +47,8 @@ export function Gallery(props) {
         <div className={styles.carouselContainer}>
           <Slider {...settings}>
             {map(screenshots, (screenshot) => (
-              <div key={screenshot.id}>
-                <Image src={screenshot.attributes.url} />
+              <div key={screenshot}>
+                <Image src={screenshot} />
               </div>
             ))}
           </Slider>

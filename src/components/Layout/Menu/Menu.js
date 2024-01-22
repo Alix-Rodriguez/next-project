@@ -22,7 +22,8 @@ export function Menu(props) {
     (async () => {
       try {
         const response = await platformCtrl.getAll();
-        setPlatforms(response.data);
+        setPlatforms(response.platforms);
+         console.log(response.platforms)
       } catch (error) {
         console.error(error);
       }
@@ -40,12 +41,14 @@ export function Menu(props) {
 
   return (
     <div className={styles.platforms}>
-      {map(platforms, (platform) => (
-        <Link key={platform.id} href={`/games/${platform.attributes.slug}`}>
-          <Image src={platform.attributes.icon.data.attributes.url} />
-          {platform.attributes.title}
+     
+       {platforms?.map((platform) => (
+        <Link key={platform.id} href={`${platform.slug}`}>
+          <Image src={platform.icon_url} />
+          {platform.title}
         </Link>
-      ))}
+      ))} 
+
 
       <button className={styles.search} onClick={openCloseSearch}>
         <Icon name="search" />

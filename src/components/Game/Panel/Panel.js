@@ -10,7 +10,7 @@ export function Panel(props) {
   const [loading, setLoading] = useState(false);
   const { addCart } = useCart();
 
-  const platform = game.platform.data;
+  const platform = game.platform;
   const buyPrice = fn.calcDiscountedPrice(game.price, game.discount);
 
   const addCartWrapper = () => {
@@ -25,7 +25,7 @@ export function Panel(props) {
   return (
     <Container className={styles.panel}>
       <div className={styles.imgContiner}>
-        <Image src={game.cover.data.attributes.url} />
+        <Image src={game.cover_url} />
       </div>
 
       <div className={styles.actionsContainer}>
@@ -34,8 +34,8 @@ export function Panel(props) {
 
           <div className={styles.moreInfo}>
             <span>
-              <Image src={platform.attributes.icon.data.attributes.url} />
-              {platform.attributes.title}
+              <Image src={game.icon_platform_url} />
+              {platform}
             </span>
             <span>
               <Icon name="check" />

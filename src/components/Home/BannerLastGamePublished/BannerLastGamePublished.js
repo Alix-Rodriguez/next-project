@@ -16,7 +16,7 @@ export function BannerLastGamePublished() {
     (async () => {
       try {
         const response = await gameCtrl.getLastPublished();
-        setGame(response.data[0]);
+        setGame(response.games[1]);
       } catch (error) {
         console.error(error);
       }
@@ -25,27 +25,26 @@ export function BannerLastGamePublished() {
 
   if (!game) return null;
 
-  const wallpaper = game.attributes.wallpaper;
-  const releaseDate = new Date(game.attributes.releaseDate).toISOString();
+  const wallpaper = game.wallpaper_url;
   const price = fn.calcDiscountedPrice(
-    game.attributes.price,
-    game.attributes.discount
+    game.price,
+    game.discount
   );
 
   return (
     <div className={styles.container}>
-      <Image src={wallpaper.data.attributes.url} className={styles.wallpaper} />
+      <Image src={wallpaper} className={styles.wallpaper} />
 
-      <Link className={styles.infoContainer} href={game.attributes.slug}>
+      <Link className={styles.infoContainer} href={game.slug}>
         <Container>
           <span className={styles.date}>
-            {DateTime.fromISO(releaseDate).minus({ days: 1 }).toRelative()}
+            {game.releaseDate}
           </span>
 
-          <h2>{game.attributes.title}</h2>
+          <h2>{game.title}</h2>
 
           <p className={styles.price}>
-            <Label.Discount>-{game.attributes.discount}%</Label.Discount>
+            <Label.Discount>-{game.discount}%</Label.Discount>
             <span className={styles.finalPrice}>{price}€</span>
           </p>
         </Container>
